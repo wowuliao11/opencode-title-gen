@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+*.tgz
+.DS_Store
+
+# Build output in src (tsc generates these)
+src/**/*.js
+src/**/*.d.ts
+src/**/*.js.map
+src/**/*.d.ts.map

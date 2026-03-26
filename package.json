@@ -1,0 +1,76 @@
+{
+  "name": "opencode-title-gen",
+  "version": "0.1.0",
+  "description": "Auto-generate meaningful session titles for OpenCode using AI",
+  "type": "module",
+  "main": "./dist/bundle.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/bundle.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "packageManager": "pnpm@10.31.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "build": "tsc && esbuild src/index.ts --bundle --platform=node --format=esm --outfile=dist/bundle.js --external:@opencode-ai/plugin --external:@opencode-ai/sdk --external:node:fs --external:node:path --external:node:os",
+    "dev": "tsc --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "pnpm run build"
+  },
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "opencode-title-gen",
+    "ai",
+    "session-title",
+    "auto-title"
+  ],
+  "author": "zhiming.bao",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wowuliao11/opencode-title-gen.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wowuliao11/opencode-title-gen/issues"
+  },
+  "homepage": "https://github.com/wowuliao11/opencode-title-gen#readme",
+  "peerDependencies": {
+    "@opencode-ai/plugin": ">=1.0.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.0.0",
+    "@commitlint/config-conventional": "^19.0.0",
+    "@eslint/js": "^9.17.0",
+    "@opencode-ai/plugin": "^1.2.27",
+    "@opencode-ai/sdk": "^1.2.27",
+    "@types/node": "^25.5.0",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.0.0",
+    "husky": "^9.0.0",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.2.0",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.0.0",
+    "vitest": "^3.0.0"
+  }
+}
