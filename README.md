@@ -5,7 +5,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/wowuliao11/opencode-title-gen/ci.yml?label=CI&labelColor=black&style=flat-square)](https://github.com/wowuliao11/opencode-title-gen/actions)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-blue?labelColor=black&style=flat-square)](https://www.typescriptlang.org/)
 
-Your OpenCode sessions are all called "Untitled". Every single one.
+Your OpenCode sessions are all called `New session - 2026-03-26T15:32:42.757Z`. Every single one.
 
 This plugin fixes that. Session goes idle → AI reads the conversation → generates a meaningful title → done. Zero interaction.
 
@@ -26,26 +26,26 @@ Or keep reading. Your call.
 ## Before / After
 
 ```
-Before:                          After:
-├── Untitled                     ├── Fix auth middleware token refresh
-├── Untitled                     ├── Add pagination to /api/users
-├── Untitled                     ├── Refactor DB connection pooling
-├── Untitled                     ├── Debug CI flaky test in auth.spec
-└── Untitled                     └── Set up ESLint v9 flat config
+Before:                                        After:
+├── New session - 2026-03-26T15:32:42.757Z     ├── Fix auth middleware token refresh
+├── New session - 2026-03-26T14:18:03.221Z     ├── Add pagination to /api/users
+├── New session - 2026-03-25T22:47:11.089Z     ├── Refactor DB connection pooling
+├── New session - 2026-03-25T19:05:58.443Z     ├── Debug CI flaky test in auth.spec
+└── New session - 2026-03-25T16:33:27.615Z     └── Set up ESLint v9 flat config
 ```
 
 ---
 
 ## How It Works
 
-| Step | What happens                                                                       |
-| ---- | ---------------------------------------------------------------------------------- |
-| 1    | Listens for `session.idle` events                                                  |
-| 2    | Counts idle events per session; triggers at threshold (default: 2)                 |
-| 3    | Skips sub-sessions and sessions with custom titles                                 |
-| 4    | Extracts conversation (first + last assistant message — saves ~60% tokens)         |
-| 5    | Creates a temporary sub-session, prompts the model for a concise title (≤50 chars) |
-| 6    | Updates the session title, cleans up the sub-session                               |
+| Step | What happens                                                                                  |
+| ---- | --------------------------------------------------------------------------------------------- |
+| 1    | Listens for `session.idle` and `session.status` (type=idle) events                            |
+| 2    | Counts idle events per session; triggers at threshold (default: 2)                            |
+| 3    | Skips sub-sessions and sessions with custom titles                                            |
+| 4    | Extracts conversation (first + last assistant message — saves ~60% tokens)                    |
+| 5    | Creates a temporary sub-session, prompts the model for a concise title (3–7 words, ≤60 chars) |
+| 6    | Updates the session title, cleans up the sub-session                                          |
 
 Debounced. Locked per-session. No duplicate generation. No race conditions.
 
@@ -97,7 +97,7 @@ Create `~/.config/opencode/smart-title.jsonc`:
   // All fields optional. These are defaults.
   "enabled": true,
   "debug": false,
-  "model": "github-copilot/claude-haiku-4.5",
+  // "model": "github-copilot/claude-haiku-4.5",
   "updateThreshold": 2,
   "maxTurns": 10,
   "maxCharsPerPart": 300,
@@ -185,4 +185,4 @@ MIT
 
 ---
 
-> This plugin is not affiliated with the OpenCode team. Built independently because I got tired of "Untitled" sessions.
+> This plugin is not affiliated with the OpenCode team. Built independently because I got tired of `New session - <timestamp>` titles.
