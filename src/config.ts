@@ -8,6 +8,7 @@ const CONFIG_PATH = join(homedir(), ".config", "opencode", "smart-title.jsonc")
 const DEFAULTS: ResolvedConfig = {
   enabled: true,
   debug: false,
+  mode: "once",
   model: undefined,
   maxTurns: 10,
   updateThreshold: 2,
@@ -25,9 +26,11 @@ export function loadConfig(): ResolvedConfig {
   try {
     const raw = readFileSync(CONFIG_PATH, "utf-8")
     const parsed: SmartTitleConfig = JSON.parse(stripJsonComments(raw))
+    const mode = parsed.mode === "continuous" ? "continuous" : DEFAULTS.mode
     return {
       enabled: parsed.enabled ?? DEFAULTS.enabled,
       debug: parsed.debug ?? DEFAULTS.debug,
+      mode,
       model: parsed.model ?? DEFAULTS.model,
       maxTurns: parsed.maxTurns ?? DEFAULTS.maxTurns,
       updateThreshold: parsed.updateThreshold ?? DEFAULTS.updateThreshold,

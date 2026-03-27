@@ -1,6 +1,13 @@
 import type { createOpencodeClient } from "@opencode-ai/sdk"
 
 /**
+ * Title generation mode:
+ * - "once": Generate a title only when the session has a default/auto-generated title. Once set, never update again.
+ * - "continuous": Re-generate the title every time the idle threshold is reached, reflecting conversation evolution.
+ */
+export type TitleMode = "once" | "continuous"
+
+/**
  * Configuration loaded from ~/.config/opencode/smart-title.jsonc
  */
 export interface SmartTitleConfig {
@@ -8,6 +15,8 @@ export interface SmartTitleConfig {
   enabled?: boolean
   /** Enable debug-level logging. Default: false */
   debug?: boolean
+  /** Title generation mode. Default: "once" */
+  mode?: TitleMode
   /** Model override in "providerID/modelID" format */
   model?: string
   /** Max conversation turns to include in the prompt. Default: 10 */
@@ -26,6 +35,7 @@ export interface SmartTitleConfig {
 export interface ResolvedConfig {
   enabled: boolean
   debug: boolean
+  mode: TitleMode
   model: string | undefined
   maxTurns: number
   updateThreshold: number

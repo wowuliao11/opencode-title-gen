@@ -97,8 +97,8 @@ export function createEventHandler(client: OpencodeClient, config: ResolvedConfi
       }
 
       const existingTitle = session.title ?? ""
-      if (existingTitle && !isDefaultTitle(existingTitle)) {
-        await log.debug("session has custom title, skipping", {
+      if (config.mode === "once" && existingTitle && !isDefaultTitle(existingTitle)) {
+        await log.debug("session has custom title, skipping (mode=once)", {
           sessionID,
           existingTitle,
         })

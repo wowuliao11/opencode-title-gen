@@ -10,6 +10,7 @@ const plugin: Plugin = async ({ client }) => {
   await log.info("plugin loaded", {
     enabled: config.enabled,
     debug: config.debug,
+    mode: config.mode,
     maxTurns: config.maxTurns,
     updateThreshold: config.updateThreshold,
     maxCharsPerPart: config.maxCharsPerPart,
