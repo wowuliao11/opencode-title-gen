@@ -1,5 +1,32 @@
 # opencode-title-gen
 
+> ## ⚠️ DEPRECATED
+>
+> **OpenCode now has built-in session title generation.** This plugin is no longer needed.
+>
+> OpenCode natively includes a hidden `title` agent that automatically generates session titles
+> after the first user message, using a lightweight model. Configure it in your `opencode.json`:
+>
+> ```jsonc
+> {
+>   // Use a cheap, fast model for title generation
+>   "small_model": "anthropic/claude-haiku-4-5",
+>
+>   // Or override the title agent specifically
+>   "agent": {
+>     "title": {
+>       "model": "github-copilot/gpt-5-mini",
+>     },
+>   },
+> }
+> ```
+>
+> See the [OpenCode docs](https://opencode.ai/docs/config/) for more details.
+>
+> **Migration**: Remove this plugin from your OpenCode config. The native title generation works out of the box.
+
+---
+
 [![npm version](https://img.shields.io/npm/v/opencode-title-gen?color=369eff&labelColor=black&style=flat-square)](https://www.npmjs.com/package/opencode-title-gen)
 [![License](https://img.shields.io/badge/license-MIT-white?labelColor=black&style=flat-square)](LICENSE)
 [![CI](https://img.shields.io/github/actions/workflow/status/wowuliao11/opencode-title-gen/ci.yml?label=CI&labelColor=black&style=flat-square)](https://github.com/wowuliao11/opencode-title-gen/actions)
